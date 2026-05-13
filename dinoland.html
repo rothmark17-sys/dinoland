@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dino Land - Virtuális Múzeum</title>
+<style>
+html { scroll-behavior: smooth; }
+body {
+margin: 0;
+font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+background-color: #050805;
+color: #e0e0e0;
+}
+
+/* KEZDŐ KÉPERNYŐ (HERO) */
+.hero {
+height: 100vh;
+width: 100%;
+background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+url('IMG_3335.png');
+background-size: cover;
+background-position: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.hero h1 {
+font-size: clamp(3.5rem, 12vw, 7rem);
+margin: 0;
+color: #4CAF50;
+text-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
+letter-spacing: 15px;
+font-weight: 900;
+}
+
+.hero h2 {
+font-size: clamp(1.2rem, 4vw, 2rem);
+color: #ffd700;
+text-transform: uppercase;
+letter-spacing: 6px;
+margin-bottom: 30px;
+}
+
+.museum-btn {
+padding: 18px 50px;
+font-size: 1.3rem;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+text-decoration: none;
+font-weight: bold;
+transition: 0.3s;
+box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.museum-btn:hover { background-color: #66bb6a; transform: scale(1.05); }
+
+/* GALÉRIA RÉSZ */
+.museum-section {
+padding: 100px 0;
+background: linear-gradient(to bottom, #050805, #121a12);
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.container { width: 90%; max-width: 1200px; }
+
+.dino-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(76, 175, 80, 0.2);
+border-radius: 25px;
+margin-bottom: 40px;
+overflow: hidden;
+transition: 0.3s;
+}
+
+.dino-card:hover { border-color: #4CAF50; box-shadow: 0 0 25px rgba(76, 175, 80, 0.1); }
+
+.dino-btn {
+width: 100%;
+padding: 30px;
+background: none;
+border: none;
+color: #fff;
+font-size: 1.8rem;
+text-align: left;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-weight: bold;
+}
+
+.dino-content {
+display: none;
+padding: 0 40px 40px 40px;
+border-top: 1px solid rgba(255,255,255,0.1);
+animation: fadeIn 0.5s ease;
+}
+
+.dino-layout {
+display: flex;
+gap: 40px;
+margin-top: 30px;
+align-items: flex-start;
+}
+
+.dino-img {
+flex: 1;
+max-width: 500px;
+border-radius: 20px;
+border: 3px solid #4CAF50;
+box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.dino-info { flex: 1; }
+
+.spec-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+background: rgba(0,0,0,0.3);
+padding: 20px;
+border-radius: 15px;
+margin-bottom: 20px;
+}
+
+.spec-item { font-size: 0.85rem; color: #aaa; text-transform: uppercase; }
+.spec-val { font-size: 1.05rem; color: #ffd700; font-weight: bold; display: block; }
+
+.comparison-box {
+background: rgba(76, 175, 80, 0.1);
+border-left: 4px solid #4CAF50;
+padding: 15px;
+margin-top: 20px;
+font-style: italic;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 1000px) {
+.dino-layout { flex-direction: column; }
+.dino-img { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<h1>DINO LAND</h1>
+<h2>Virtuális Múzeum</h2>
+<a href="#museum" class="museum-btn">Irány a múzeum</a>
+</section>
+
+<section id="museum" class="museum-section">
+<div class="container">
+
+<!-- 1. T-REX -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('trex')">1. Tyrannosaurus rex <span>▼</span></button>
+<div id="trex" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3324.png" alt="T-Rex" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Húsevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Méretek</span><span class="spec-val">12-13 m | 8-9 tonna</span></div>
+<div><span class="spec-item">Időszak</span><span class="spec-val">Kréta vége</span></div>
+</div>
+<p>A legfélelmetesebb szárazföldi ragadozó. Erős állkapcsa és éles látása tette királlyá.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Csak a térdéig érnél, a feje akkora, mint egy kocsi.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 2. STEGOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('stego')">2. Stegosaurus <span>▼</span></button>
+<div id="stego" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3323.png" alt="Stegosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika, Európa</span></div>
+<div><span class="spec-item">Méretek</span><span class="spec-val">9 m | 3-5 tonna</span></div>
+<div><span class="spec-item">Védekezés</span><span class="spec-val">Farkastüskék</span></div>
+</div>
+<p>Hátlemezeiről és tüskés farkáról ismert ikonikus jura kori dínó.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Akkora, mint egy busz. Hátlemezei kétszer magasabbak egy embernél.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 3. VELOCIRAPTOR -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('velo')">3. Velociraptor <span>▼</span></button>
+<div id="velo" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3325.png" alt="Velociraptor" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Húsevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Ázsia</span></div>
+<div><span class="spec-item">Méretek</span><span class="spec-val">2 m | 15-20 kg</span></div>
+<div><span class="spec-item">Jellemző</span><span class="spec-val">Tollas, gyors</span></div>
+</div>
+<p>Kicsi, de halálosan gyors vadász, sarló alakú karmokkal.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Csak pulyka méretű, de ne tévesszen meg a látszat!</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 4. TRICERATOPS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('tri')">4. Triceratops <span>▼</span></button>
+<div id="tri" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3326.png" alt="Triceratops" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Méretek</span><span class="spec-val">8-9 m | 6-12 tonna</span></div>
+<div><span class="spec-item">Fegyverzet</span><span class="spec-val">3 szarv, pajzs</span></div>
+</div>
+<p>A kréta időszak "elefántja", hatalmas fejpajzzsal és szarvakkal.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Egy felnőtt ember teljesen eltűnne a pajzsa mögött.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 5. ALLOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('allo')">5. Allosaurus <span>▼</span></button>
+<div id="allo" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3333.png" alt="Allosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Húsevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Több kontinens</span></div>
+<div><span class="spec-item">Méretek</span><span class="spec-val">10 m | 2 tonna</span></div>
+<div><span class="spec-item">Becenév</span><span class="spec-val">Őskori farkas</span></div>
+</div>
+<p>A jura időszak falkában vadászó, veszélyes ragadozója.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Kétszer magasabb nálad, és sokkal mozgékonyabb.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 6. APATOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('apa')">6. Apatosaurus <span>▼</span></button>
+<div id="apa" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3334.png" alt="Apatosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Hossz</span><span class="spec-val">21-23 méter</span></div>
+<div><span class="spec-item">Súly</span><span class="spec-val">16-22 tonna</span></div>
+</div>
+<p>Hosszú nyakú óriás, amely ostorszerű farkával tartotta távol a támadókat.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Két csuklós busz hossza. Csak egy pont vagy mellette.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 7. BRACHIOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('brachio')">7. Brachiosaurus <span>▼</span></button>
+<div id="brachio" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3328.png" alt="Brachiosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Magasság</span><span class="spec-val">12-16 méter</span></div>
+<div><span class="spec-item">Súly</span><span class="spec-val">30-50 tonna</span></div>
+</div>
+<p>A legmagasabb lombok szakértője, testalkata a zsiráféhoz hasonlított.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Olyan magas, mint egy 4 emeletes panelház.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 8. SPINOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('spino')">8. Spinosaurus <span>▼</span></button>
+<div id="spino" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3330.png" alt="Spinosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Hal- és Húsevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Afrika</span></div>
+<div><span class="spec-item">Hossz</span><span class="spec-val">14-18 méter</span></div>
+<div><span class="spec-item">Vitorla</span><span class="spec-val">Hátúszó szerű</span></div>
+</div>
+<p>Félig vízi életmódot folytatott, a valaha élt egyik leghosszabb húsevő.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Csak a vitorlája magasabb egy felnőtt férfinál.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 9. ANKYLOSAURUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('ankylo')">9. Ankylosaurus <span>▼</span></button>
+<div id="ankylo" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3329.png" alt="Ankylosaurus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Páncél</span><span class="spec-val">Csontos lemezek</span></div>
+<div><span class="spec-item">Farok</span><span class="spec-val">Csontbuzogány</span></div>
+</div>
+<p>Egy élő erőd, amelyet szinte semmilyen ragadozó nem tudott megsebezni.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Alacsonyabb nálad, de széles, mint egy teherautó.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 10. PARASAUROLOPHUS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('para')">10. Parasaurolophus <span>▼</span></button>
+<div id="para" class="dino-content">
+<div class="dino-layout">
+<img src="IMG_3332.png" alt="Parasaurolophus" class="dino-img">
+<div class="dino-info">
+<div class="spec-grid">
+<div><span class="spec-item">Étrend</span><span class="spec-val">Növényevő</span></div>
+<div><span class="spec-item">Lelőhely</span><span class="spec-val">Észak-Amerika</span></div>
+<div><span class="spec-item">Különlegesség</span><span class="spec-val">Fejtaréj</span></div>
+<div><span class="spec-item">Funkció</span><span class="spec-val">Hangképzés</span></div>
+</div>
+<p>Hosszú taréjával mély, kürtszerű hangokat tudott kiadni társai hívására.</p>
+<div class="comparison-box"><strong>Emberhez képest:</strong> Ha ágaskodott, feje 4 méter magasan volt.</div>
+</div>
+</div>
+</div>
+</div>
+
+
+Márk Róth <rothmark17@gmail.com>
+22:25 (0 perccel ezelőtt)
+címzett: én
+
+<!-- NYITVATARTÁS -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('nyitva')">🕒 Nyitvatartás & Jegyek <span>▼</span></button>
+<div id="nyitva" class="dino-content">
+<div class="spec-grid">
+<div><span class="spec-item">Hétfő - Péntek</span><span class="spec-val">09:00 - 18:00</span></div>
+<div><span class="spec-item">Hétvége</span><span class="spec-val">10:00 - 20:00</span></div>
+</div>
+<p>A virtuális múzeum az év minden napján látogatható! A belépés mindenki számára ingyenes.</p>
+</div>
+</div>
+
+<!-- VENDÉGKÖNYV -->
+<div class="dino-card">
+<button class="dino-btn" onclick="toggle('vendegkonyv')">✍️ Látogatói Emlékkönyv <span>▼</span></button>
+<div id="vendegkonyv" class="dino-content">
+<div style="margin-top: 20px;">
+<label for="visitor-name" style="display:block; margin-bottom: 5px; color: #4CAF50;">Neved:</label>
+<input type="text" id="visitor-name" style="width: 100%; padding: 10px; border-radius: 10px; border: none; margin-bottom: 15px; background: rgba(255,255,255,0.1); color: white;">
+
+<label for="visitor-msg" style="display:block; margin-bottom: 5px; color: #4CAF50;">Üzeneted:</label>
+<textarea id="visitor-msg" rows="4" style="width: 100%; padding: 10px; border-radius: 10px; border: none; margin-bottom: 15px; background: rgba(255,255,255,0.1); color: white; resize: vertical;"></textarea>
+
+<button onclick="addEntry()" class="museum-btn" style="font-size: 1rem; padding: 10px 30px;">Bejegyzés küldése</button>
+</div>
+
+<div id="entries-container" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+<p style="font-style: italic; color: #888;">Még nincsenek bejegyzések. Legyél te az első!</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<script>
+function toggle(id) {
+const content = document.getElementById(id);
+const isVisible = (content.style.display === "block");
+document.querySelectorAll('.dino-content').forEach(el => el.style.display = 'none');
+content.style.display = isVisible ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
